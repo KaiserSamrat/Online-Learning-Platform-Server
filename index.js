@@ -94,14 +94,19 @@ app.post('/addreview',(req,res)=>{
     })
   
   })
-// app.post('/addservice',(req,res)=>{
-//     const services = req.body;
-//     serviceCollection.insertMany(services,(err,result)=>{
-//         console.log(err,result);
-//         res.send({count: result});
-//     })
-    
-// })
+
+  app.patch('/update/:id',(req,res) =>{
+    const id = req.params.id;
+    cartCollection.updateOne({_id: ObjectID(id)},
+    {
+      $set:{status: req.body.status}
+    })
+    .then(result =>{
+      console.log(result);
+    })
+
+  })
+
 });
 
 app.listen(port)
